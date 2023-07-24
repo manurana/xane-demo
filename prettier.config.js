@@ -1,10 +1,7 @@
-/** @type {import('prettier').Config} */
+// @ts-check
+
+/** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
 module.exports = {
-  endOfLine: "lf",
-  semi: false,
-  singleQuote: false,
-  tabWidth: 2,
-  trailingComma: "es5",
   importOrder: [
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
@@ -32,4 +29,4 @@ module.exports = {
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
   ],
-}
+};
