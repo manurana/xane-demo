@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:fix": "next lint --fix",
+    "prettify": "prettier --write ."
   },
   "dependencies": {
     "@types/node": "20.4.4",
@@ -28,8 +30,5 @@
     "husky": ">=7",
     "lint-staged": ">=10",
     "prettier": "^3.0.0"
-  },
-  "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
   }
 }
