@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    // formatting + linting
+    "esbenp.prettier-vscode",
+    "rohit-gohri.format-code-action",
+    "dbaeumer.vscode-eslint"
+  ]
+}
