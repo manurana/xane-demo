@@ -8,6 +8,7 @@ import {
   Inter as FontSans,
 } from "next/font/google";
 
+import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Toaster />
           <TailwindIndicator />
         </ThemeProvider>
       </body>
