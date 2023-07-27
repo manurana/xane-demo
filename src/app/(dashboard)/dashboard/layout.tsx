@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
+import { currentUser } from "@clerk/nextjs";
 
 import { dashboardConfig } from "@/config/dashboard";
-// import { getCurrentUser } from "@/lib/session";
 import { MainNav } from "@/components/main-nav";
 import { DashboardNav } from "@/components/nav";
 import { SiteFooter } from "@/components/site-footer";
@@ -14,12 +14,7 @@ interface DashboardLayoutProps {
 export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  // const user = await getCurrentUser();
-  const user = {
-    name: "John Doe",
-    // image: "/images/avatars/avatar-1.jpg",
-    email: "m@t.com",
-  };
+  const user = await currentUser();
 
   if (!user) {
     return notFound();
@@ -32,9 +27,11 @@ export default async function DashboardLayout({
           <MainNav items={dashboardConfig.mainNav} />
           <UserAccountNav
             user={{
-              name: user.name,
-              // image: user.image,
-              email: user.email,
+              name: `${user.firstName} ${user.lastName}`,
+              image: user.profileImageUrl,
+              email: user.emailAddresses.find(
+                (ea) => ea.id === user.primaryEmailAddressId,
+              )?.emailAddress!,
             }}
           />
         </div>
