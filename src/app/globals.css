@@ -76,3 +76,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .\? {
+    @apply outline outline-2 outline-red-500/75;
+  }
+  .\?\? > * {
+    @apply outline outline-2 outline-blue-500/75;
+  }
+}
