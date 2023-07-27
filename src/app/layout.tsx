@@ -7,6 +7,7 @@ import {
   Space_Grotesk as FontHeading,
   Inter as FontSans,
 } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/toaster";
@@ -82,9 +83,11 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-          <TailwindIndicator />
+          <ClerkProvider>
+            {children}
+            <Toaster />
+            <TailwindIndicator />
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
