@@ -1,8 +1,6 @@
 import { redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs";
 
-// import { authOptions } from "@/lib/auth";
-// import { db } from "@/lib/db";
-// import { getCurrentUser } from "@/lib/session";
 import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import { DashboardHeader } from "@/components/header";
 import { PostCreateButton } from "@/components/post-create-button";
@@ -14,33 +12,19 @@ export const metadata = {
 };
 
 export default async function DashboardPage() {
-  // const user = await getCurrentUser();
-  const user = {
-    name: "John Doe",
-    // image: "/images/avatars/avatar-1.jpg",
-    email: "m@t.com",
-  };
+  const user = await currentUser();
 
   if (!user) {
     redirect("/login");
   }
 
-  // const posts = await db.post.findMany({
-  //   where: {
-  //     authorId: user.id,
-  //   },
-  //   select: {
-  //     id: true,
-  //     title: true,
-  //     published: true,
-  //     createdAt: true,
-  //   },
-  //   orderBy: {
-  //     updatedAt: "desc",
-  //   },
-  // });
+  const getPosts = async () => {
+    const res = await fetch("https://dummyjson.com/posts?limit=10");
+    const data = await res.json();
+    return data.posts;
+  };
 
-  const posts = [];
+  const posts = await getPosts();
 
   return (
     <DashboardShell>
