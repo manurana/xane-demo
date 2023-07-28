@@ -20,7 +20,7 @@ export type User = {
 };
 
 const getTeamMembers = async () => {
-  const res = await fetch("https://dummyjson.com/users?limit=10");
+  const res = await fetch("https://dummyjson.com/users");
   const data = await res.json();
   const users = data.users as User[];
   return data.users;

@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Icons } from "@/components/icons";
 
 import type { User } from "./page";
 
@@ -57,7 +58,17 @@ export const columns = [
     header: "Full Name",
   }),
   columnHelper.accessor("email", {
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <Icons.sortArrow className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   }),
   columnHelper.accessor("company.title", {
     header: "Title",

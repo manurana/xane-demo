@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   ArrowRight,
+  ArrowUpDown,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -71,4 +72,5 @@ export const Icons = {
   twitter: Twitter,
   check: Check,
   team: Users,
+  sortArrow: ArrowUpDown,
 };
