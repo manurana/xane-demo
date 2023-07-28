@@ -8,7 +8,7 @@ import * as z from "zod";
 
 import { cn } from "@/lib/utils";
 import { userNameSchema } from "@/lib/validations/user";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,

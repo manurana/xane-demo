@@ -28,5 +28,10 @@ export const dashboardConfig: DashboardConfig = {
       href: "/dashboard/settings",
       icon: "settings",
     },
+    {
+      title: "Team",
+      href: "/dashboard/settings/team",
+      icon: "team",
+    },
   ],
 };
