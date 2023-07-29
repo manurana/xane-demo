@@ -13,7 +13,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -24,6 +23,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/data-table-pagination";
+
+import TeamMemberDialog from "./team-member-dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,7 +57,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter name..."
           value={
@@ -67,6 +68,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <TeamMemberDialog />
       </div>
       <div className="rounded-md border">
         <Table>
