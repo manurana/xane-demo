@@ -7,20 +7,16 @@ import { Loader2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { cn } from "@/lib/utils";
 import { teamMemberSchema } from "@/lib/validations/team-member";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 
+import { TeamMember } from "./page";
+
 interface TeamMemberFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  teamMember?: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
+  teamMember?: TeamMember;
   closeDialog?: () => void;
 }
 

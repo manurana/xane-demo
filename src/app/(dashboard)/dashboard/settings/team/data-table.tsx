@@ -25,7 +25,10 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/data-table-pagination";
 
+import { columns } from "./columns";
+import { TeamMember } from "./page";
 import TeamMemberDialog from "./team-member-dialog";
+import { TeamMemberForm } from "./team-member-form";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,6 +43,16 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
+  const [selectedTeamMember, setSelectedTeamMember] = React.useState<
+    TeamMember | undefined
+  >(undefined);
+
+  const onEdit = (teamMember: TeamMember) => {
+    setSelectedTeamMember(teamMember);
+    setOpen(true);
+  };
+
+  // const columns = getColumns({ onEdit });
 
   const table = useReactTable({
     data,
@@ -129,7 +142,12 @@ export function DataTable<TData, TValue>({
       <div className="py-2">
         <DataTablePagination table={table} />
       </div>
-      <TeamMemberDialog open={open} onOpenChange={setOpen} />
+      <TeamMemberDialog open={open} onOpenChange={setOpen}>
+        <TeamMemberForm
+          closeDialog={() => setOpen(false)}
+          teamMember={selectedTeamMember}
+        />
+      </TeamMemberDialog>
     </div>
   );
 }

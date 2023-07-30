@@ -1,13 +1,11 @@
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
-import { UserNameForm } from "@/components/user-name-form";
 
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
-import TeamMemberDialog from "./team-member-dialog";
 
 //dummyjson.com user type
-export type User = {
+export type TeamMember = {
   id: string;
   firstName: string;
   lastName: string;
@@ -23,19 +21,19 @@ export type User = {
 const getTeamMembers = async () => {
   const res = await fetch("https://dummyjson.com/users");
   const data = await res.json();
-  const users = data.users as User[];
-  return data.users;
+  const users = data.users as Array<TeamMember>;
+  return users;
 };
 
 const TeamPage = async () => {
-  const users = await getTeamMembers();
+  const teamMembers = await getTeamMembers();
   return (
     <DashboardShell>
       <DashboardHeader
         heading="Team"
         text="Manage account and website settings."
       />
-      <DataTable columns={columns} data={users} />
+      <DataTable columns={columns} data={teamMembers} />
     </DashboardShell>
   );
 };

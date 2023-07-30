@@ -1,24 +1,22 @@
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-import { TeamMemberForm } from "./team-member-form";
 
 type TeamMemberDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  children: React.ReactNode;
 };
 
-const TeamMemberDialog = ({ open, onOpenChange }: TeamMemberDialogProps) => {
+const TeamMemberDialog = ({
+  open,
+  onOpenChange,
+  children,
+}: TeamMemberDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
@@ -29,7 +27,7 @@ const TeamMemberDialog = ({ open, onOpenChange }: TeamMemberDialogProps) => {
             provided
           </DialogDescription>
         </DialogHeader>
-        <TeamMemberForm closeDialog={() => onOpenChange(false)} />
+        {children}
       </DialogContent>
     </Dialog>
   );
