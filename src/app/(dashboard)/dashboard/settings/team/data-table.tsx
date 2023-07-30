@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import {
-  ColumnDef,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
@@ -25,20 +24,16 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/data-table-pagination";
 
-import { columns } from "./columns";
+import { getColumns } from "./columns";
 import { TeamMember } from "./page";
 import TeamMemberDialog from "./team-member-dialog";
 import { TeamMemberForm } from "./team-member-form";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+interface DataTableProps {
+  data: TeamMember[];
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ data }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -52,7 +47,12 @@ export function DataTable<TData, TValue>({
     setOpen(true);
   };
 
-  // const columns = getColumns({ onEdit });
+  const onClickNewMember = () => {
+    setSelectedTeamMember(undefined);
+    setOpen(true);
+  };
+
+  const columns = getColumns({ onEdit });
 
   const table = useReactTable({
     data,
@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Button variant="secondary" onClick={() => setOpen(true)}>
+        <Button variant="secondary" onClick={onClickNewMember}>
           Add team member
         </Button>
       </div>

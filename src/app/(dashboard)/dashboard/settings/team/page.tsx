@@ -1,7 +1,6 @@
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
 
-import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
 //dummyjson.com user type
@@ -33,7 +32,7 @@ const TeamPage = async () => {
         heading="Team"
         text="Manage account and website settings."
       />
-      <DataTable columns={columns} data={teamMembers} />
+      <DataTable data={teamMembers} />
     </DashboardShell>
   );
 };
