@@ -12,6 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -71,6 +72,8 @@ export function DataTable({ data }: DataTableProps) {
 
   const [open, setOpen] = React.useState(false);
 
+  const classNameForUpdated = "animation-element-updated";
+
   return (
     <div>
       <div className="flex items-center justify-between py-4">
@@ -114,6 +117,7 @@ export function DataTable({ data }: DataTableProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="animate-element-updated"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
