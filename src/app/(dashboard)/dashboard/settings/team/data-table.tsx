@@ -13,6 +13,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -55,6 +56,8 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div>
       <div className="flex items-center justify-between py-4">
@@ -68,7 +71,9 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <TeamMemberDialog />
+        <Button variant="secondary" onClick={() => setOpen(true)}>
+          Add team member
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -124,6 +129,7 @@ export function DataTable<TData, TValue>({
       <div className="py-2">
         <DataTablePagination table={table} />
       </div>
+      <TeamMemberDialog open={open} onOpenChange={setOpen} />
     </div>
   );
 }

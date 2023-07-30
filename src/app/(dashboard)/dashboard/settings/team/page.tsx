@@ -4,6 +4,7 @@ import { UserNameForm } from "@/components/user-name-form";
 
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+import TeamMemberDialog from "./team-member-dialog";
 
 //dummyjson.com user type
 export type User = {

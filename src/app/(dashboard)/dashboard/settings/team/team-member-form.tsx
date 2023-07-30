@@ -21,11 +21,15 @@ interface TeamMemberFormProps extends React.HTMLAttributes<HTMLFormElement> {
     lastName: string;
     email: string;
   };
+  closeDialog?: () => void;
 }
 
 type FormData = z.infer<typeof teamMemberSchema>;
 
-export function TeamMemberForm({ teamMember }: TeamMemberFormProps) {
+export function TeamMemberForm({
+  teamMember,
+  closeDialog,
+}: TeamMemberFormProps) {
   const router = useRouter();
   const {
     handleSubmit,
@@ -70,15 +74,16 @@ export function TeamMemberForm({ teamMember }: TeamMemberFormProps) {
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your name was not updated. Please try again.",
+        description: "Please try again.",
         variant: "destructive",
       });
     }
 
     toast({
-      description: "Your name has been updated.",
+      description: `Team member ${teamMember ? "updated" : "added"}.`,
     });
 
+    closeDialog && closeDialog();
     router.refresh();
   }
 

@@ -13,12 +13,14 @@ import { Label } from "@/components/ui/label";
 
 import { TeamMemberForm } from "./team-member-form";
 
-const TeamMemberDialog = () => {
+type TeamMemberDialogProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+};
+
+const TeamMemberDialog = ({ open, onOpenChange }: TeamMemberDialogProps) => {
   return (
-    <Dialog>
-      <DialogTrigger>
-        <Button variant="secondary">Add team member</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add team member</DialogTitle>
@@ -27,7 +29,7 @@ const TeamMemberDialog = () => {
             provided
           </DialogDescription>
         </DialogHeader>
-        <TeamMemberForm />
+        <TeamMemberForm closeDialog={() => onOpenChange(false)} />
       </DialogContent>
     </Dialog>
   );
