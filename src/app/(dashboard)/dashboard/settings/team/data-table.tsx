@@ -31,20 +31,16 @@ import { TeamMember } from "./page";
 import TeamMemberDialog from "./team-member-dialog";
 import { TeamMemberForm } from "./team-member-form";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-}
+type DataTableProps = {
+  data: TeamMember[];
+};
 declare module "@tanstack/react-table" {
   interface TableMeta<TData extends RowData> {
     onEditTeamMember: (teamMember: TeamMember) => void;
   }
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ data }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
