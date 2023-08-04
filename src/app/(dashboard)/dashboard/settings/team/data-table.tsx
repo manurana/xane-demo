@@ -29,7 +29,7 @@ import { DataTablePagination } from "@/components/data-table-pagination";
 import { columns } from "./columns";
 import { TeamMember } from "./page";
 import TeamMemberDialog from "./team-member-dialog";
-import { TeamMemberForm } from "./team-member-form";
+import TeamMemberForm from "./team-member-form";
 
 type DataTableProps = {
   data: TeamMember[];

@@ -22,7 +22,7 @@ interface TeamMemberFormProps extends React.HTMLAttributes<HTMLFormElement> {
 
 type FormData = z.infer<typeof teamMemberSchema>;
 
-export function TeamMemberForm({
+export default function TeamMemberForm({
   teamMember,
   closeDialog,
 }: TeamMemberFormProps) {
