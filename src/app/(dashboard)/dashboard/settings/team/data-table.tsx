@@ -36,7 +36,7 @@ type DataTableProps = {
 };
 declare module "@tanstack/react-table" {
   interface TableMeta<TData extends RowData> {
-    onEditTeamMember: (teamMember: TeamMember) => void;
+    onClickEditTeamMember: (teamMember: TeamMember) => void;
   }
 }
 
@@ -49,23 +49,23 @@ export function DataTable({ data }: DataTableProps) {
     TeamMember | undefined
   >(undefined);
 
-  const [open, setOpen] = React.useState(false);
+  const [teamMemberDialogOpen, setTeamMemberDialogOpen] = React.useState(false);
 
-  const onAddTeamMember = () => {
+  const onClickAddTeamMember = () => {
     setSelectedTeamMember(undefined);
-    setOpen(true);
+    setTeamMemberDialogOpen(true);
   };
 
-  const onEditTeamMember = (teamMember: TeamMember) => {
+  const onClickEditTeamMember = (teamMember: TeamMember) => {
     setSelectedTeamMember(teamMember);
-    setOpen(true);
+    setTeamMemberDialogOpen(true);
   };
 
   const table = useReactTable({
     data,
     columns,
     meta: {
-      onEditTeamMember,
+      onClickEditTeamMember,
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -92,7 +92,7 @@ export function DataTable({ data }: DataTableProps) {
           }
           className="max-w-sm"
         />
-        <Button variant="secondary" onClick={onAddTeamMember}>
+        <Button variant="secondary" onClick={onClickAddTeamMember}>
           Add team member
         </Button>
       </div>
@@ -150,9 +150,12 @@ export function DataTable({ data }: DataTableProps) {
       <div className="py-2">
         <DataTablePagination table={table} />
       </div>
-      <TeamMemberDialog open={open} onOpenChange={setOpen}>
+      <TeamMemberDialog
+        open={teamMemberDialogOpen}
+        onOpenChange={setTeamMemberDialogOpen}
+      >
         <TeamMemberForm
-          closeDialog={() => setOpen(false)}
+          closeDialog={() => setTeamMemberDialogOpen(false)}
           teamMember={selectedTeamMember}
         />
       </TeamMemberDialog>

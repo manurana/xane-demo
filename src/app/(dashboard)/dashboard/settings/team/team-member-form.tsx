@@ -35,9 +35,9 @@ export default function TeamMemberForm({
   } = useForm<FormData>({
     resolver: zodResolver(teamMemberFormSchema),
     defaultValues: {
-      firstName: teamMember?.firstName || "",
-      lastName: teamMember?.lastName || "",
-      email: teamMember?.email || "",
+      firstName: teamMember?.firstName ?? "",
+      lastName: teamMember?.lastName ?? "",
+      email: teamMember?.email ?? "",
     },
   });
   const [isSaving, setIsSaving] = React.useState<boolean>(false);

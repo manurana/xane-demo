@@ -20,10 +20,10 @@ const columnHelper = createColumnHelper<TeamMember>();
 
 const RowActions = ({
   row,
-  onEditTeamMember,
+  onClickEditTeamMember,
 }: {
   row: Row<TeamMember>;
-  onEditTeamMember: (teamMember: TeamMember) => void;
+  onClickEditTeamMember: (teamMember: TeamMember) => void;
 }) => {
   const teamMember = row.original;
   return (
@@ -42,7 +42,7 @@ const RowActions = ({
           Copy user ID
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => onEditTeamMember(teamMember)}>
+        <DropdownMenuItem onClick={() => onClickEditTeamMember(teamMember)}>
           Edit Member
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -72,7 +72,9 @@ export const columns = [
     cell: ({ row, table }) => (
       <RowActions
         row={row}
-        onEditTeamMember={table.options.meta?.onEditTeamMember ?? (() => {})}
+        onClickEditTeamMember={
+          table.options.meta?.onClickEditTeamMember ?? (() => {})
+        }
       />
     ),
   }),
