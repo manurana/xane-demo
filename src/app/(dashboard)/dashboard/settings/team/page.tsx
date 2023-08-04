@@ -1,26 +1,14 @@
+import { teamMembersSchema } from "@/lib/validations/team-member";
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
 
 import { DataTable } from "./data-table";
 
-//dummyjson.com user type
-export type TeamMember = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  image: string;
-  company: {
-    name: string;
-    title: string;
-    department: string;
-  };
-};
-
 const getTeamMembers = async () => {
   const res = await fetch("https://dummyjson.com/users");
   const data = await res.json();
-  const users = data.users as Array<TeamMember>;
+  const parsedData = teamMembersSchema.parse(data);
+  const users = parsedData.users;
   return users;
 };
 

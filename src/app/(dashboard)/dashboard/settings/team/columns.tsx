@@ -3,6 +3,7 @@
 import { createColumnHelper, Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
+import { TeamMember } from "@/lib/validations/team-member";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,8 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DataTableColumnHeader } from "@/components/data-table-column-header";
 import { Icons } from "@/components/icons";
-
-import type { TeamMember } from "./page";
 
 const columnHelper = createColumnHelper<TeamMember>();
 

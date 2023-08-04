@@ -14,6 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { TeamMember } from "@/lib/validations/team-member";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -27,7 +28,6 @@ import {
 import { DataTablePagination } from "@/components/data-table-pagination";
 
 import { columns } from "./columns";
-import { TeamMember } from "./page";
 import TeamMemberDialog from "./team-member-dialog";
 import TeamMemberForm from "./team-member-form";
 

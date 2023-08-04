@@ -7,20 +7,21 @@ import { Loader2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { teamMemberSchema } from "@/lib/validations/team-member";
+import {
+  TeamMember,
+  teamMemberFormSchema,
+} from "@/lib/validations/team-member";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
-
-import { TeamMember } from "./page";
 
 interface TeamMemberFormProps extends React.HTMLAttributes<HTMLFormElement> {
   teamMember?: TeamMember;
   closeDialog?: () => void;
 }
 
-type FormData = z.infer<typeof teamMemberSchema>;
+type FormData = z.infer<typeof teamMemberFormSchema>;
 
 export default function TeamMemberForm({
   teamMember,
@@ -32,7 +33,7 @@ export default function TeamMemberForm({
     register,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(teamMemberSchema),
+    resolver: zodResolver(teamMemberFormSchema),
     defaultValues: {
       firstName: teamMember?.firstName || "",
       lastName: teamMember?.lastName || "",
