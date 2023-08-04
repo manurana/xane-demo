@@ -9,6 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  RowData,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
@@ -34,6 +35,11 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
+declare module "@tanstack/react-table" {
+  interface TableMeta<TData extends RowData> {
+    onEditTeamMember: (teamMember: TeamMember) => void;
+  }
+}
 
 export function DataTable<TData, TValue>({
   columns,
@@ -47,16 +53,24 @@ export function DataTable<TData, TValue>({
     TeamMember | undefined
   >(undefined);
 
-  const onEdit = (teamMember: TeamMember) => {
+  const [open, setOpen] = React.useState(false);
+
+  const onAddTeamMember = () => {
+    setSelectedTeamMember(undefined);
+    setOpen(true);
+  };
+
+  const onEditTeamMember = (teamMember: TeamMember) => {
     setSelectedTeamMember(teamMember);
     setOpen(true);
   };
 
-  // const columns = getColumns({ onEdit });
-
   const table = useReactTable({
     data,
     columns,
+    meta: {
+      onEditTeamMember,
+    },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
@@ -68,8 +82,6 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
-
-  const [open, setOpen] = React.useState(false);
 
   return (
     <div>
@@ -84,7 +96,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Button variant="secondary" onClick={() => setOpen(true)}>
+        <Button variant="secondary" onClick={onAddTeamMember}>
           Add team member
         </Button>
       </div>

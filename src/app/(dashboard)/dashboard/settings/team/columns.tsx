@@ -18,7 +18,13 @@ import type { TeamMember } from "./page";
 
 const columnHelper = createColumnHelper<TeamMember>();
 
-const RowActions = ({ row }: { row: Row<TeamMember> }) => {
+const RowActions = ({
+  row,
+  onEditTeamMember,
+}: {
+  row: Row<TeamMember>;
+  onEditTeamMember: (teamMember: TeamMember) => void;
+}) => {
   const teamMember = row.original;
   return (
     <DropdownMenu>
@@ -36,16 +42,13 @@ const RowActions = ({ row }: { row: Row<TeamMember> }) => {
           Copy user ID
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Edit Member</DropdownMenuItem>
-        {/* <DropdownMenuItem>Disable Member</DropdownMenuItem> */}
+        <DropdownMenuItem onClick={() => onEditTeamMember(teamMember)}>
+          Edit Member
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
-
-// export const getColumns = () => {
-//   return;
-// };
 
 export const columns = [
   columnHelper.accessor("id", {
@@ -74,6 +77,11 @@ export const columns = [
   columnHelper.display({
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => <RowActions row={row} />,
+    cell: ({ row, table }) => (
+      <RowActions
+        row={row}
+        onEditTeamMember={table.options.meta?.onEditTeamMember ?? (() => {})}
+      />
+    ),
   }),
 ];
