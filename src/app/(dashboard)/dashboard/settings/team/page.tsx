@@ -1,5 +1,7 @@
-import { auth, useAuth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
+import invariant from "tiny-invariant";
 
+import { supabaseClient } from "@/lib/supabaseClient";
 import { teamMembersSchema } from "@/lib/validations/team-member";
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
@@ -14,12 +16,17 @@ const getTeamMembers = async () => {
   return users;
 };
 
-const getTeamMembers2 = async () => {};
+const getTeamMembers2 = async (token: string) => {
+  const supabase = await supabaseClient(token);
+  const { data, error } = await supabase.from("team_users").select();
+  console.log(data);
+};
 
 const TeamPage = async () => {
   const { getToken } = auth();
   const token = await getToken({ template: "supabase" });
-  console.log(token);
+  invariant(token, "No token");
+  await getTeamMembers2(token);
 
   const teamMembers = await getTeamMembers();
   return (
