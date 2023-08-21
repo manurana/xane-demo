@@ -1,3 +1,5 @@
+import { auth, useAuth } from "@clerk/nextjs";
+
 import { teamMembersSchema } from "@/lib/validations/team-member";
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
@@ -12,7 +14,13 @@ const getTeamMembers = async () => {
   return users;
 };
 
+const getTeamMembers2 = async () => {};
+
 const TeamPage = async () => {
+  const { getToken } = auth();
+  const token = await getToken({ template: "supabase" });
+  console.log(token);
+
   const teamMembers = await getTeamMembers();
   return (
     <DashboardShell>
